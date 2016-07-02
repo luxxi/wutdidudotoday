@@ -1,0 +1,7 @@
+<h4>Add new goal: </h4>
+<%= render 'form' %>
+<ul>
+<% @goals.each do |goal| %>
+  <li><%= goal.name %></li>
+<% end %>
+</ul>
