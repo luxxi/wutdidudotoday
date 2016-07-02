@@ -22,7 +22,7 @@ class GoalsController < ApplicationController
   end
 
   def goals
-    @goals = Goal.order(:created_at)
+    @goals = current_user.goals.active
   end
 
 end
