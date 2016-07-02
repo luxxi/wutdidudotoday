@@ -1,8 +1,8 @@
 class GoalsController < ApplicationController
   before_action :authenticate_user!
+  before_action :goals
 
   def index
-    @goals = Goal.order(:created_at)
     @goal = Goal.new
   end
 
@@ -11,13 +11,18 @@ class GoalsController < ApplicationController
     if @goal.save
       redirect_to root_path, alert: 'Goal was successfully created.'
     else
-      redirect_to root_path, error: 'Something went wrong!'
+      goals
+      render :index
     end
   end
 
   private
   def goal_params
     params.require(:goal).permit(:name, :due, :notify_at)
+  end
+
+  def goals
+    @goals = Goal.order(:created_at)
   end
 
 end
